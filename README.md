@@ -5,4 +5,4 @@ For CMPM163 Final Project.
 link: https://hhllii.github.io/CMPM163_Project/hidden_image.html <br>
 
 ### Planet
-link: https://hhllii.github.io/CMPM163_Project/final project planet eota.html <br>
+link: https://hhllii.github.io/CMPM163_Project/final_project_planet_eota.html <br>
