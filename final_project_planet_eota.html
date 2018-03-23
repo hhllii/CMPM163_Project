@@ -40,8 +40,8 @@
 	/////////////////
 	var earthGeometry = new THREE.SphereGeometry(10, 50, 50);
 	var earthMaterial = new THREE.MeshPhongMaterial({
-		map: new THREE.ImageUtils.loadTexture("/img/earth_texture.jpg"),
-		bumpMap : new THREE.ImageUtils.loadTexture("/img/earthbump1k.jpg"),
+		map: new THREE.TextureLoader().load('/img/earth_texture.jpg'),
+		bumpMap : new THREE.TextureLoader().load('/img/earthbump1k.jpg'),
 		bumpScale : 0.7,
 		color: 0xf1f1f1
 	});
@@ -50,7 +50,7 @@
 	//Clouds
 	var cloudGeometry = new THREE.SphereGeometry(10.3,  50, 50);
 	var cloudMaterial = new THREE.MeshPhongMaterial({
-		map: new THREE.ImageUtils.loadTexture("/img/clouds.jpg"),
+		map: new THREE.TextureLoader().load('/img/clouds.jpg'),
 		transparent: true,
 		opacity: 0.3
 	});
@@ -70,7 +70,7 @@
 	//Moon
 	var moonGeometry = new THREE.SphereGeometry(4, 60,60);
 	var moonMaterial = new THREE.MeshPhongMaterial({
-		map: THREE.ImageUtils.loadTexture("/img/moon_texture.jpg")
+		map: THREE.TextureLoader().load('/img/moon_texture.jpg')
 	});
 	var moon = new THREE.Mesh(moonGeometry, moonMaterial);
 	moon.position.set(20,0,0);
