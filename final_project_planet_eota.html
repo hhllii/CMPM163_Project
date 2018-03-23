@@ -70,7 +70,7 @@
 	//Moon
 	var moonGeometry = new THREE.SphereGeometry(4, 60,60);
 	var moonMaterial = new THREE.MeshPhongMaterial({
-		map: THREE.TextureLoader().load('../img/moon_texture.jpg')
+		map: new THREE.TextureLoader().load('../img/moon_texture.jpg')
 	});
 	var moon = new THREE.Mesh(moonGeometry, moonMaterial);
 	moon.position.set(20,0,0);
