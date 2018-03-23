@@ -56,24 +56,14 @@
 	});
 	var clouds = new THREE.Mesh(cloudGeometry, cloudMaterial);
 	scene.add(clouds);
-	/*
-	//Stars
-	var starGeometry = new THREE.SphereGeometry(1000, 50, 50);
-	var starMaterial = new THREE.MeshPhongMaterial({
-		map: new THREE.ImageUtils.loadTexture("/images/galaxy_starfield.png"),
-		side: THREE.DoubleSide,
-		shininess: 0
-	});
-	var starField = new THREE.Mesh(starGeometry, starMaterial);
-	scene.add(starField);
-	*/
+
 	//Moon
 	var moonGeometry = new THREE.SphereGeometry(4, 60,60);
 	var moonMaterial = new THREE.MeshPhongMaterial({
 		map: new THREE.TextureLoader().load('img/moon_texture.jpg')
 	});
 	var moon = new THREE.Mesh(moonGeometry, moonMaterial);
-	moon.position.set(20,0,0);
+	moon.position.set(10,0,0);
 	scene.add(moon);
 	var r = 35;
 	var theta = 0;
