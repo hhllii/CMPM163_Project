@@ -9,3 +9,6 @@ link: https://hhllii.github.io/CMPM163_Project/final_project_planet_eota.html <b
 
 ### Star
 link:https://hhllii.github.io/CMPM163_Project/star_ZixuanZhao.html <br>
+
+### Jump Transition
+link:https://hhllii.github.io/CMPM163_Project/speedver1.html <br>
