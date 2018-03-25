@@ -25,6 +25,112 @@
 	<script src="js/dat.gui.min.js"></script>
 	<script src="./js/GPUParticleSystem.js"></script>
 
+	<script id="hid_vertexShader" type="x-shader/x-vertex">
+
+		//Three.js gives us these automatically when a perspective camera is bound to the renderer
+		uniform mat4 modelViewMatrix;
+		uniform mat4 projectionMatrix;
+		
+		//Since we are using BufferGeometry, we have defined the attributes that we need manually
+		attribute vec3 position;
+		attribute vec2 texCoords;
+	
+		//link variables between the vertex shader and the fragment shader
+		varying vec2 UV;
+	
+		void main() {
+	
+			//pass our interpolated texCoords to the fragment shader
+			   UV = texCoords;
+	
+				//of course, we always have to output our vertices in clip coords by multiplying through a projection matrix.
+				gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); 
+			
+			  }
+	
+		</script>
+		<script id="hid_fragmentShader_black" type="x-shader/x-fragment">
+	
+		precision mediump float;
+	
+		//special data type used to access texture stored on GPU
+		uniform sampler2D t1;
+		
+		//need to know the resolution of texture so that we can grab neighbors of current pixel
+		uniform float rx;
+		uniform float ry;
+	
+		uniform float mixVal;
+	
+		//this has to have the same name as in the vertex shader. Here, in the fragment shader, we interpolate across the textureCoordinates
+		varying vec2 UV;
+	
+			  void main() {
+			//white background
+			vec4 color = texture2D(t1, UV);
+	
+			//turn to gray_scale
+			float grey_scale = dot(color.rgb, vec3(0.222, 0.707, 0.071));
+	
+			color.r = grey_scale;
+			color.g = grey_scale;
+			color.b = grey_scale;
+	
+			float a = 1.0 - color.r;
+			float r = 0.0;
+	
+			color = vec4(r, r, r, a);
+	
+			gl_FragColor = color; 
+	
+		}
+		</script>
+	
+		<script id="hid_fragmentShader" type="x-shader/x-fragment">
+	
+		precision mediump float;
+	
+		//special data type used to access texture stored on GPU
+		uniform sampler2D t1;
+		uniform sampler2D t2;
+		
+		//need to know the resolution of texture so that we can grab neighbors of current pixel
+		uniform float rx;
+		uniform float ry;
+	
+		uniform float mixVal;
+	
+		//this has to have the same name as in the vertex shader. Here, in the fragment shader, we interpolate across the textureCoordinates
+		varying vec2 UV;
+	
+			  void main() {
+			//white background
+			vec4 color1 = texture2D(t1, UV);
+	
+			//turn to gray_scale
+			float grey_scale1 = dot(color1.rgb, vec3(0.222, 0.707, 0.071));
+	
+			color1.r = grey_scale1;
+			color1.g = grey_scale1;
+			color1.b = grey_scale1;
+	
+			//black background
+			vec4 color2 = texture2D(t2, UV);
+			//vec4 color2 = vec4(1.0, 1.0, 1.0, 1.0);
+			float grey_scale2 = dot(color2.rgb, vec3(0.222, 0.707, 0.071)) * 0.2;
+			color2.r = grey_scale2;
+			color2.g = grey_scale2;
+			color2.b = grey_scale2;
+	
+			float a = 1.0 - color1.r + color2.r;
+			float r = color2.r / a;
+	
+			gl_FragColor = vec4(r, r, r, a); 
+	
+		}
+	
+		</script>
+
 
 	<script id="vertexShader" type="x-shader/x-vertex">
 
@@ -83,6 +189,12 @@
 	var controls;
 	var tick = 0;
 
+	var vs = document.getElementById('hid_vertexShader').textContent;
+	var fs = document.getElementById('hid_fragmentShader').textContent;
+	var fs_b = document.getElementById('hid_fragmentShader_black').textContent;
+
+	var texture1 = new THREE.TextureLoader().load('res/test.jpg');
+	var texture2 = new THREE.TextureLoader().load('res/toho.png');
 	init();
 	animate();
 	animateParticleStars();
