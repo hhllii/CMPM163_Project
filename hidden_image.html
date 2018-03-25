@@ -20,7 +20,7 @@
 	<script src="js/controls/OrbitControls.js"></script>
 	<script src="js/dat.gui.min.js"></script>
 	<script src="js/stats.min.js"></script>
-	
+
 	<script id="hid_vertexShader" type="x-shader/x-vertex">
 
 	//Three.js gives us these automatically when a perspective camera is bound to the renderer
@@ -196,7 +196,7 @@
 
 
 			// materials (ie, linking to the shader program)
-			var uniforms = {
+			var uniforms_hid = {
 				t1: { type: "t", value: texture1 },
 				t2: { type: "t", value: texture2 },
 				rx: { type: "f", value: 1024 / 2 },
@@ -206,7 +206,7 @@
 
 
 			material_hid_cb = new THREE.RawShaderMaterial({
-				uniforms: uniforms,
+				uniforms: uniforms_hid,
 				vertexShader: vs,
 				fragmentShader: fs,
 				transparent: true
@@ -225,7 +225,7 @@
 			scene.add( white_back );
 
 			material_hid_bk = new THREE.RawShaderMaterial({
-				uniforms: uniforms,
+				uniforms: uniforms_hid,
 				vertexShader: vs,
 				fragmentShader: fs_b,
 				transparent: true
