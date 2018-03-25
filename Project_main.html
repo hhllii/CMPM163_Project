@@ -418,6 +418,8 @@
 		}
 
 		function onWindowResize(event) {
+			camera.aspect = window.innerWidth / window.innerHeight;
+			camera.updateProjectionMatrix();
 			uniforms.iResolution.value.x = window.innerWidth;
 			uniforms.iResolution.value.y = window.innerHeight;
 			renderer.setSize(window.innerWidth, window.innerHeight);
