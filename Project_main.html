@@ -77,6 +77,7 @@
 		var camera, scene, renderer;
 		var uniforms;
 		var clock = new THREE.Clock();
+		var mesh_tp, tp_in = true;
 
 
 		init();
@@ -112,10 +113,11 @@
 			});
 
 			var mesh_tp = new THREE.Mesh(geometry, material);
+			mesh_tp.name = 'tp';
 			scene.add(mesh_tp);
 
 			renderer = new THREE.WebGLRenderer();
-			var controls = new THREE.OrbitControls(camera,renderer.domElement);
+			var controls = new THREE.OrbitControls(camera, renderer.domElement);
 			renderer.setClearColor(0x000000);
 			container.appendChild(renderer.domElement);
 
@@ -139,10 +141,18 @@
 		}
 
 		function render() {
-
 			uniforms.iTime.value += clock.getDelta();
+			if(uniforms.iTime.value > 10 && tp_in){
+				removeTp();
+				tp_in = false;
+			}
 			renderer.render(scene, camera);
+			
+		}
 
+		function removeTp() {
+			var selectedObject = scene.getObjectByName(tp);
+			scene.remove(selectedObject);
 		}
 
 	</script>
