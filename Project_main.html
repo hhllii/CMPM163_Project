@@ -188,6 +188,7 @@
 		var gui = new dat.GUI({ width: 279 });
 		var controls;
 		var tick = 0;
+		var options, spawnerOptions, particleSystem;
 
 		var vs = document.getElementById('hid_vertexShader').textContent;
 		var fs = document.getElementById('hid_fragmentShader').textContent;
@@ -376,7 +377,7 @@
 			};
 
 			spawnerOptions = {
-				spawnRate: 500,
+				spawnRate: 600,
 				horizontalSpeed: 1.0,
 				verticalSpeed: 1.0,
 				timeScale: 0.2
@@ -391,7 +392,7 @@
 			gui.add(options, "lifetime", .1, 8);
 			gui.add(options, "turbulence", 0, 0.6);
 
-			gui.add(spawnerOptions, "spawnRate", 10, 2000);
+			gui.add(spawnerOptions, "spawnRate", 300, 3000);
 			gui.add(spawnerOptions, "timeScale", -1, 1);
 
 			//
@@ -404,15 +405,19 @@
 			////////////////////////////////////////////////////////////////////////////////
 
 
-			particleSystem = new THREE.GPUParticleSystem({
-				maxParticles: 250000,
-				particleNoiseTex: textureLoader.load('perlin-512.png'),
-				particleSpriteTex: textureLoader.load('star.png')
-			});
+			// particleSystem = new THREE.GPUParticleSystem({
+			// 	maxParticles: 250000,
+			// 	particleNoiseTex: textureLoader.load('perlin-512.png'),
+			// 	particleSpriteTex: textureLoader.load('star.png')
+			// });
 
-			renderer = new THREE.WebGLRenderer();
-			renderer.setClearColor(0x000000);
-			container.appendChild(renderer.domElement);
+			// renderer = new THREE.WebGLRenderer();
+			// renderer.setClearColor(0x000000);
+			// container.appendChild(renderer.domElement);
+					renderer = new THREE.WebGLRenderer();
+			renderer.setPixelRatio( window.devicePixelRatio );
+			renderer.setSize( window.innerWidth, window.innerHeight );
+			container.appendChild( renderer.domElement );
 			// START PARTICLE STUFF
 			controls = new THREE.OrbitControls(camera, renderer.domElement);
 			// END STAR PARTICLE STUFF
@@ -440,7 +445,7 @@
 
 		function animateParticleStars() {
 
-			requestAnimationFrame(animate);
+			requestAnimationFrame(animateParticleStars);
 
 			controls.update();
 
