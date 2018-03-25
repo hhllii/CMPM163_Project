@@ -20,3 +20,6 @@ link: https://hhllii.github.io/CMPM163_Project/jump_transition_ver1.html <br>
 
 ### Week 10 Presentation Link
 link: https://prezi.com/view/wja8P1VEX0oEWLC4KJhx/ <br>
+
+### Youtube video demonstration of final group effect
+link: https://youtu.be/whxRwWvaAF8 <br>
