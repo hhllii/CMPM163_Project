@@ -128,7 +128,7 @@
 			////  LIGHTS ////
 			/////////////////
 			var ambientLight = new THREE.AmbientLight(0xFFFFFF);
-			scene.add(ambientLight);
+			scene_main.add(ambientLight);
 			var spotlight = new THREE.DirectionalLight(0xFFFFFF);
 			spotlight.position.set(50,50,50);
 			scene_main.add(spotlight);
@@ -154,7 +154,6 @@
 			});
 			var clouds = new THREE.Mesh(cloudGeometry, cloudMaterial);
 			scene_main.add(clouds);
-
 			//Moon
 			var moonGeometry = new THREE.SphereGeometry(4, 60,60);
 			var moonMaterial = new THREE.MeshPhongMaterial({
