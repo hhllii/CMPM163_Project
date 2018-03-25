@@ -168,29 +168,6 @@
 
 			scene = new THREE.Scene();
 
-			//create terrain
-			// var terr_geometry = new THREE.PlaneGeometry( 50, 50, 300, 300 );
-			// var terr_uniforms = {
-			// 	displaceAmt: { type: "f", value: 0.0 },
-			// 	tPic: { type: "t", value: heightMap },
-			// 	//tGrass: { type: "t", value: grass },
-			// 	//tSnow: { type: "t", value: snow },
-			// 	tHill: { type: "t", value: hill },
-			// };
-
-
-			// var terr_material = new THREE.RawShaderMaterial({
-
-			// 	uniforms: terr_uniforms,
-			// 	vertexShader: terr_vs,
-			// 	fragmentShader: terr_fs,
-			// });
-
-			// var terrain = new THREE.Mesh( terr_geometry, terr_material );
-			// terrain.material.side = THREE.DoubleSide;
-			// terrain.rotateX(-Math.PI/2);
-			// scene.add( terrain );
-
 			//texture
 			var textureLoader = new THREE.TextureLoader();
 			// The GPU Particle system extends THREE.Object3D, and so you can use it
