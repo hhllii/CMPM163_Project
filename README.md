@@ -2,8 +2,11 @@
 For CMPM163 Final Project.
 ### Project Final Effect
 link: https://hhllii.github.io/CMPM163_Project/Project_main.html <br>
-
+<br>
 ### Hidden image by Shuli He
+The inital example without shader:
+link: https://hhllii.github.io/CMPM163_Project/hidden_image_example(no shader).html <br>
+implement with shader:
 link: https://hhllii.github.io/CMPM163_Project/hidden_image.html <br>
 
 ### Planet by Eric Ota
