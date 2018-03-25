@@ -119,29 +119,6 @@
 
     scene = new THREE.Scene();
 
-    //create terrain
-    // var terr_geometry = new THREE.PlaneGeometry( 50, 50, 300, 300 );
-    // var terr_uniforms = {
-    // 	displaceAmt: { type: "f", value: 0.0 },
-    // 	tPic: { type: "t", value: heightMap },
-    // 	//tGrass: { type: "t", value: grass },
-    // 	//tSnow: { type: "t", value: snow },
-    // 	tHill: { type: "t", value: hill },
-    // };
-
-
-    // var terr_material = new THREE.RawShaderMaterial({
-
-    // 	uniforms: terr_uniforms,
-    // 	vertexShader: terr_vs,
-    // 	fragmentShader: terr_fs,
-    // });
-
-    // var terrain = new THREE.Mesh( terr_geometry, terr_material );
-    // terrain.material.side = THREE.DoubleSide;
-    // terrain.rotateX(-Math.PI/2);
-    // scene.add( terrain );
-
     //texture
     var textureLoader = new THREE.TextureLoader();
     // The GPU Particle system extends THREE.Object3D, and so you can use it
@@ -150,7 +127,7 @@
     // system for your whole scene
 
     particleSystem = new THREE.GPUParticleSystem( {
-      maxParticles: 250000,
+      maxParticles: 25000,
       particleNoiseTex: textureLoader.load( 'perlin-512.png' ),
       particleSpriteTex: textureLoader.load( 'star.png' )
     } );
@@ -181,15 +158,15 @@
 
     //
 
-    gui.add( options, "velocityRandomness", 0, 2 );
-    gui.add( options, "size", 1, 60 );
-    gui.add( options, "sizeRandomness", 0, 25 );
-    gui.add( options, "colorRandomness", 0, 1 );
-    gui.add( options, "lifetime", .1, 8 );
-    gui.add( options, "turbulence", 0, 0.6 );
+    // gui.add( options, "velocityRandomness", 0, 2 );
+    // gui.add( options, "size", 1, 60 );
+    // gui.add( options, "sizeRandomness", 0, 25 );
+    // gui.add( options, "colorRandomness", 0, 1 );
+    // gui.add( options, "lifetime", .1, 8 );
+    // gui.add( options, "turbulence", 0, 0.6 );
 
-    gui.add( spawnerOptions, "spawnRate", 10, 2000 );
-    gui.add( spawnerOptions, "timeScale", -1, 1 );
+    // gui.add( spawnerOptions, "spawnRate", 10, 2000 );
+    // gui.add( spawnerOptions, "timeScale", -1, 1 );
 
     //
 
