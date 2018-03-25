@@ -142,12 +142,11 @@
 
 		function render() {
 			uniforms.iTime.value += clock.getDelta();
-			if(uniforms.iTime.value > 10 && tp_in){
+			if(uniforms.iTime.value > 5 && tp_in){
 				removeTp();
 				tp_in = false;
 			}
 			renderer.render(scene, camera);
-			
 		}
 
 		function removeTp() {
