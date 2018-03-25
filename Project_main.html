@@ -92,6 +92,10 @@
 			camera.position.z = 5;
 
 			scene = new THREE.Scene();
+			scene_main = new THREE.Scene();
+			var main_color = new THREE.Color( 0xff0000 );
+			scene_main.background = main_color;
+
 			stats = new Stats();
 			container.appendChild(stats.dom);
 
@@ -142,17 +146,22 @@
 
 		function render() {
 			uniforms.iTime.value += clock.getDelta();
-			if(uniforms.iTime.value > 5 && tp_in){
-				removeTp();
-				tp_in = false;
+			// if(uniforms.iTime.value > 5 && tp_in){
+			// 	removeTp();
+			// 	tp_in = false;
+			// }
+			if(uniforms.iTime.value > 5){
+				renderer.render(scene_main,camera);
+			}else{
+				renderer.render(scene, camera);
 			}
-			renderer.render(scene, camera);
+			
 		}
 
-		function removeTp() {
-			var selectedObject = scene.getObjectByName(tp);
-			scene.remove(selectedObject);
-		}
+		// function removeTp() {
+		// 	var selectedObject = scene.getObjectByName(tp);
+		// 	scene.remove(selectedObject);
+		// }
 
 	</script>
 </body>
