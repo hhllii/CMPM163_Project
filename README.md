@@ -23,3 +23,6 @@ link: https://prezi.com/view/wja8P1VEX0oEWLC4KJhx/ <br>
 
 ### Youtube video demonstration of final group effect
 link: https://youtu.be/whxRwWvaAF8 <br>
+
+### Documentation
+link: https://hhllii.github.io/CMPM163_Project/163_Final_Project_Paper_Space_Scene.pdf <br>
