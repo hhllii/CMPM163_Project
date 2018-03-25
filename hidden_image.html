@@ -20,7 +20,7 @@
 	<script src="js/controls/OrbitControls.js"></script>
 	<script src="js/dat.gui.min.js"></script>
 	<script src="js/stats.min.js"></script>
-	<script id="vertexShader" type="x-shader/x-vertex">
+	<script id="hid_vertexShader" type="x-shader/x-vertex">
 
 	//Three.js gives us these automatically when a perspective camera is bound to the renderer
 	uniform mat4 modelViewMatrix;
@@ -44,9 +44,44 @@
      	 }
 
     </script>
+	<script id="hid_fragmentShader_black" type="x-shader/x-fragment">
 
+	precision mediump float;
 
-	<script id="fragmentShader" type="x-shader/x-fragment">
+	//special data type used to access texture stored on GPU
+	uniform sampler2D t1;
+	
+	//need to know the resolution of texture so that we can grab neighbors of current pixel
+	uniform float rx;
+	uniform float ry;
+
+	uniform float mixVal;
+
+	//this has to have the same name as in the vertex shader. Here, in the fragment shader, we interpolate across the textureCoordinates
+	varying vec2 UV;
+
+      	void main() {
+		//white background
+		vec4 color = texture2D(t1, UV);
+
+		//turn to gray_scale
+		float grey_scale = dot(color.rgb, vec3(0.222, 0.707, 0.071));
+
+		color.r = grey_scale;
+		color.g = grey_scale;
+		color.b = grey_scale;
+
+		float a = 1.0 - color.r;
+    	float r = 0.0;
+
+		color = vec4(r, r, r, a);
+
+		gl_FragColor = color; 
+
+	}
+	</script>
+
+	<script id="hid_fragmentShader" type="x-shader/x-fragment">
 
 	precision mediump float;
 
@@ -98,8 +133,9 @@
 
 		var camera, scene, renderer;
 
-		var vs = document.getElementById('vertexShader').textContent;
-		var fs = document.getElementById('fragmentShader').textContent;
+		var vs = document.getElementById('hid_vertexShader').textContent;
+		var fs = document.getElementById('hid_fragmentShader').textContent;
+		var fs_b = document.getElementById('hid_fragmentShader_black').textContent;
 
 		var mesh;
 		var material;
@@ -128,7 +164,7 @@
 
 			// buffer geometry
 
-			var geometry = new THREE.BufferGeometry();
+			var geometry_img = new THREE.BufferGeometry();
 
 			var vertices = new Float32Array([
 				-1.0, -1.0, 0.0,
@@ -154,8 +190,8 @@
 
 
 			// itemSize = 3 because there are 3 values (components) per vertex
-			geometry.addAttribute('position', new THREE.BufferAttribute(vertices, 3));
-			geometry.addAttribute('texCoords', new THREE.BufferAttribute(texCoords, 2));
+			geometry_img.addAttribute('position', new THREE.BufferAttribute(vertices, 3));
+			geometry_img.addAttribute('texCoords', new THREE.BufferAttribute(texCoords, 2));
 
 
 			// materials (ie, linking to the shader program)
@@ -168,7 +204,7 @@
 			};
 
 
-			material = new THREE.RawShaderMaterial({
+			material_hid_cb = new THREE.RawShaderMaterial({
 				uniforms: uniforms,
 				vertexShader: vs,
 				fragmentShader: fs,
@@ -176,9 +212,9 @@
 			});
 
 
-			mesh = new THREE.Mesh(geometry, material);
-			mesh.material.side = THREE.DoubleSide; //to render both sides of triangle
-			scene.add(mesh);
+			mesh_hid_cb = new THREE.Mesh(geometry_img, material_hid_cb);
+			mesh_hid_cb.material.side = THREE.DoubleSide; //to render both sides of triangle
+			scene.add(mesh_hid_cb);
 		
 
 			back_geometry = new THREE.PlaneGeometry(3,4);
@@ -186,6 +222,17 @@
 			var white_back = new THREE.Mesh( back_geometry, back_material );
 			white_back.position.z = -1;
 			scene.add( white_back );
+
+			material_hid_bk = new THREE.RawShaderMaterial({
+				uniforms: uniforms,
+				vertexShader: vs,
+				fragmentShader: fs_b,
+				transparent: true
+			});
+			mesh_hid_bk = new THREE.Mesh(geometry_img, material_hid_bk);
+			mesh_hid_bk.material.side = THREE.DoubleSide; //to render both sides of triangle
+			mesh_hid_bk.position.x = 3;
+			scene.add(mesh_hid_bk);
 
 			//GUI
 			gui = new dat.GUI();
@@ -236,7 +283,7 @@
 
 			var time = performance.now();
 
-			mesh.material.uniforms.mixVal.value = mouseX;
+			mesh_hid_cb.material.uniforms.mixVal.value = mouseX;
 
 			renderer.render(scene, camera);
 		}
