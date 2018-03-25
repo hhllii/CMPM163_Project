@@ -97,8 +97,6 @@
 
 		scene = new THREE.Scene();
 		scene_main = new THREE.Scene();
-		var main_color = new THREE.Color( 0xff0000 );
-		scene_main.background = main_color;
 
 		stats = new Stats();
 		container.appendChild(stats.dom);
@@ -312,6 +310,7 @@
 		if(uniforms.iTime.value > 5){
 			renderer.render(scene_main,camera);
 		}else{
+			camera.lookAt(new THREE.Vector3(0,0,-45));
 			renderer.render(scene, camera);
 		}
 
